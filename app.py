@@ -4,10 +4,18 @@ import joblib, json
 import numpy as np
 import pandas as pd
 from typing import Dict, Any  
+from fastapi.middleware.cors import CORSMiddleware
 
 #App Setup
 app = FastAPI(title = "Student Performance API")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ["http://localhost:5173"],
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
+)
 
 #Load Model Data
 model = joblib.load("student_performance_xgb.pkl")
